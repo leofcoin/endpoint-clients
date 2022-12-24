@@ -34,7 +34,7 @@ export default class Client {
     return this.request('selectedAccount')
   }
 
-  selectAccount({address}) {
+  selectAccount(address) {
     return this.request('selectAccount', {address})
   }
 
@@ -46,10 +46,10 @@ export default class Client {
     return this.request('hasTransactionToHandle')
   }
 
-  getBlock({index}) {
+  getBlock(index) {
     return this.request('getBlock', { index })
   }
-  blocks({amount}) {
+  blocks(amount) {
     return this.request('blocks', {amount})
   }
 
@@ -65,7 +65,7 @@ export default class Client {
   validators() {
     return this.request('validators')
   }
-  lookup({name}) {
+  lookup(name) {
     return this.request('lookup', { name })
   }
 
