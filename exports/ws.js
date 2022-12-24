@@ -1,7 +1,7 @@
 import socketRequestClient from 'socket-request-client'
 
 export default class Client {
-  constructor(url = 'http://localhost:4040', networkVersion = 'leofcoin-peach') {
+  constructor(url = 'ws://localhost:4040', networkVersion = 'leofcoin-peach') {
     this.url = url
     this.networkVersion = networkVersion
   }
