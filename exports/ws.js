@@ -105,8 +105,8 @@ export default class Client {
   participate(address) {
     return this.request('participate', { address })
   }
-  createContractAddress(selectedAccount, code, params) {
-    return this.request('createContractAddress', { selectedAccount, code, params })
+  createContractAddress(owner, code, params) {
+    return this.request('createContractAddress', { owner, code, params })
   }
   deployContract(code, params) {
     return this.request('deployContract', { code, params })
