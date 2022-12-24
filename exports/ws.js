@@ -53,8 +53,8 @@ export default class Client {
     return this.request('blocks', {amount})
   }
 
-  createTransactionFrom(params) {
-    return this.request('createTransactionFrom', params)
+  createTransactionFrom(from, to, method, parameters, nonce) {
+    return this.request('createTransactionFrom', {from, to, method, parameters, nonce})
   }
   peerId() {
     return this.request('peerId')
