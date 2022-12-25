@@ -1,4 +1,7 @@
 export default class {
+  get isHttpClient() {
+    return true
+  }
   constructor(url, networkVersion) {
     this.url = url
     this.networkVersion = networkVersion
