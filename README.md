@@ -17,7 +17,8 @@ const http = new HttpClient('http://localhost:8080', networkVersion)
 ```
 
 ## api
-### selectAccount(address: `string`)
+### new Client(url, networkVersion)
+#### selectAccount(address: `string`)
 `address`: desired address
 > set default account to given address
 ```js
@@ -25,21 +26,21 @@ await client.selectAccount(address)
 ```
 <br>
 
-### getBlock(index: `number`)
+#### getBlock(index: `number`)
 `index`: index of the block to fetch<br>
 ```js
 await client.getBlock(10)
 ```
 <br>
 
-### blocks(amount)
+#### blocks(amount)
 `amount`: the amount to slice
 ```js
 await client.blocks(-25)
 ```
 <br>
 
-### createTransactionFrom(from: `string`, to: `string`, method: `string`, parameters: `array`, nonce: `number` | `undefined`)
+#### createTransactionFrom(from: `string`, to: `string`, method: `string`, parameters: `array`, nonce: `number` | `undefined`)
 
 `from`:<br>
 `to`: <br>
@@ -51,14 +52,14 @@ await client.createTransactionFrom(from, to, method, parameters, nonce)
 ```
 <br>
 
-### lookup(name: `string`)
+#### lookup(name: `string`)
 `name`: name of the contract to lookup the address and owner of
 ```js
 await client.lookup('contractName')
 ```
 <br>
 
-### participate(address: `string`)
+#### participate(address: `string`)
 `address`: <br>
 
 ```js
@@ -66,7 +67,7 @@ await client.participate(address)
 ```
 <br>
 
-### staticCall(contract: `string`, method: `string`, params: `array`)
+#### staticCall(contract: `string`, method: `string`, params: `array`)
 `contract`: contract address todo the call on
 `method`: method/function to call
 `params`: array containing params needed to call the desired method 
@@ -75,7 +76,7 @@ await client.staticCall(contract, method, params)
 ```
 <br>
 
-### createContractAddress(owner: `string`, code: `string`, params: `array`)
+#### createContractAddress(owner: `string`, code: `string`, params: `array`)
 `owner`: address of the deployer<br>
 `code`: contract as a string<br>
 `params`: contract constructor params<br>
@@ -85,7 +86,7 @@ const address = await client.createContractAddress(owner, code, params)
 ```
 <br>
 
-### deployContract(code: `string`, params: `array`)
+#### deployContract(code: `string`, params: `array`)
 `code`: contract as a string<br>
 `params`: contract constructor params<br>
 
@@ -94,26 +95,26 @@ const tx = await client.deployContract(code, params)
 ```
 <br>
 
-### accounts() 
+#### accounts() 
 ```js
 await client.accounts()
 ```
 <br>
 
-### hasTransactionToHandle() 
+#### hasTransactionToHandle() 
 ```js
 await client.hasTransactionToHandle()
 ```
 <br>
 
-### balances()
+#### balances()
 > returns all balances
 ```js
 await client.balances()
 ```
 <br>
 
-### balancOf(address: `string`, format: `boolean`)
+#### balancOf(address: `string`, format: `boolean`)
 `address`: The address to check<br> 
 `format`: Wether or not to format<br>
 > returns the balance of given address as BigNumber or string (when format is true)
@@ -122,85 +123,85 @@ await client.balanceOf(address, true)
 ```
 <br>
 
-### selectedAccount()
+#### selectedAccount()
 ```js
 await client.selectedAccount()
 ```
 <br>
 
-### peerId()
+#### peerId()
 ```js
 await client.peerId()
 ```
 <br>
 
-### peers() 
+#### peers() 
 ```js
 await client.peers()
 ```
 <br>
 
-### validators() 
+#### validators() 
 ```js
 await client.validators()
 ```
 <br>
 
-### nativeBurns()
+#### nativeBurns()
 ```js
 await client.nativeBurns()
 ```
 <br>
 
-### contracts()
+#### contracts()
 ```js
 await client.contracts()
 ```
 <br>
 
-### nativeMints()
+#### nativeMints()
 ```js
 await client.nativeMints()
 ```
 <br>
 
-### nativeToken()
+#### nativeToken()
 ```js
 await client.nativeToken()
 ```
 <br>
 
-### nativeTransfers()
+#### nativeTransfers()
 ```js
 await client.  nativeTransfers()
 ```
 <br>
 
-### totalSize()
+#### totalSize()
 ```js
 await client.totalSize()
 ```
 <br>
 
-### totalTransactions()
+#### totalTransactions()
 ```js
 await client.totalTransactions()
 ```
 <br>
 
-### totalBlocks()
+#### totalBlocks()
 ```js
 await client.totalBlocks()
 ```
 <br>
 
-### nativeCalls()
+#### nativeCalls()
 ```js
 await client.nativeCalls()
 ```
 <br>
 
-### participating()
+#### participating()
 ```js
 await client.participating()
 ```
