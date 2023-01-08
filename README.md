@@ -10,7 +10,7 @@ npm i @leofcoin/endpoint-clients
 import WsClient from '@leofcoin/endpoint-clients/ws'
 import HttpClient from '@leofcoin/endpoint-clients/http'
 
-const networkVersion = 'leofcoin-peach'
+const networkVersion = 'peach'
 
 const ws = new WsClient('ws://localhost:4040', networkVersion)
 const http = new HttpClient('http://localhost:8080', networkVersion)
