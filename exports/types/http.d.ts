@@ -1,0 +1,32 @@
+export default class {
+    get isHttpClient(): boolean;
+    constructor(url: any, networkVersion: any);
+    _fetch(method: any, params: any): Promise<any>;
+    balances(): Promise<any>;
+    balanceOf(address: any, format: any): Promise<any>;
+    selectedAccount(): Promise<any>;
+    selectAccount(address: any): Promise<any>;
+    accounts(): Promise<any>;
+    hasTransactionToHandle(): Promise<any>;
+    getBlock(index: any): Promise<any>;
+    blocks(amount: any): Promise<any>;
+    sendTransaction(transaction: any): Promise<any>;
+    peerId(): Promise<any>;
+    peers(): Promise<any>;
+    validators(): Promise<any>;
+    lookup(name: any): Promise<any>;
+    staticCall(contract: any, method: any, params: any): Promise<any>;
+    nativeBurns(): Promise<any>;
+    contracts(): Promise<any>;
+    nativeMints(): Promise<any>;
+    nativeToken(): Promise<any>;
+    nativeTransfers(): Promise<any>;
+    totalSize(): Promise<any>;
+    totalTransactions(): Promise<any>;
+    totalBlocks(): Promise<any>;
+    nativeCalls(): Promise<any>;
+    participating(): Promise<any>;
+    participate(address: any): Promise<any>;
+    createContractAddress(owner: any, code: any, params: any): Promise<any>;
+    deployContract(code: any, params: any): Promise<any>;
+}

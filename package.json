@@ -6,8 +6,10 @@
     "./ws": "./exports/ws.js",
     "./http": "./exports/http.js"
   },
+  "types": "./exports/types/index.d.ts",
   "type": "module",
   "scripts": {
+    "build": "rollup -c",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -20,5 +22,13 @@
   "bugs": {
     "url": "https://github.com/leofcoin/endpoint-clients/issues"
   },
-  "homepage": "https://github.com/leofcoin/endpoint-clients#readme"
+  "homepage": "https://github.com/leofcoin/endpoint-clients#readme",
+  "devDependencies": {
+    "@rollup/plugin-typescript": "^11.0.0",
+    "rollup": "^3.14.0",
+    "tslib": "^2.5.0"
+  },
+  "dependencies": {
+    "socket-request-client": "^1.7.3"
+  }
 }
