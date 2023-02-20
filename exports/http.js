@@ -1,4 +1,6 @@
 class http {
+    url;
+    networkVersion;
     get isHttpClient() {
         return true;
     }
@@ -6,10 +8,19 @@ class http {
         this.url = url;
         this.networkVersion = networkVersion;
     }
-    async _fetch(method, params) {
+    async _fetch(method, params, type = 'json') {
         params = new URLSearchParams(params).toString();
         const response = await fetch(`${this.url}/${method}?${params}`);
-        return response.json();
+        return response[type]();
+    }
+    async _fetchString(method, params) {
+        return String(await this._fetch(method, params, 'text'));
+    }
+    async _fetchNumber(method, params) {
+        return Number(await this._fetchString(method, params));
+    }
+    async _fetchBoolean(method, params) {
+        return Boolean((await this._fetchString(method, params)) === 'true');
     }
     balances() {
         return this._fetch('balances');
@@ -18,7 +29,7 @@ class http {
         return this._fetch(`balanceOf`, { address, format });
     }
     selectedAccount() {
-        return this._fetch('selectedAccount');
+        return this._fetchString('selectedAccount');
     }
     selectAccount(address) {
         return this._fetch('selectAccount', { address });
@@ -27,7 +38,7 @@ class http {
         return this._fetch('accounts');
     }
     hasTransactionToHandle() {
-        return this._fetch('hasTransactionToHandle');
+        return this._fetchBoolean('hasTransactionToHandle');
     }
     getBlock(index) {
         return this._fetch('getBlock', { index });
@@ -39,7 +50,7 @@ class http {
         return this._fetch('sendTransaction', transaction);
     }
     peerId() {
-        return this._fetch('peerId');
+        return this._fetchString('peerId');
     }
     peers() {
         return this._fetch('peers');
@@ -54,34 +65,34 @@ class http {
         return this._fetch('staticCall', { contract, method, params });
     }
     nativeBurns() {
-        return this._fetch('nativeBurns');
+        return this._fetchNumber('nativeBurns');
     }
     contracts() {
         return this._fetch('contracts');
     }
     nativeMints() {
-        return this._fetch('nativeMints');
+        return this._fetchNumber('nativeMints');
     }
     nativeToken() {
-        return this._fetch('nativeToken');
+        return this._fetchString('nativeToken');
     }
     nativeTransfers() {
-        return this._fetch('nativeTransfers');
+        return this._fetchNumber('nativeTransfers');
     }
     totalSize() {
-        return this._fetch('totalSize');
+        return this._fetchNumber('totalSize');
     }
     totalTransactions() {
-        return this._fetch('totalTransactions');
+        return this._fetchNumber('totalTransactions');
     }
     totalBlocks() {
-        return this._fetch('totalBlocks');
+        return this._fetchNumber('totalBlocks');
     }
     nativeCalls() {
-        return this._fetch('nativeCalls');
+        return this._fetchNumber('nativeCalls');
     }
     participating() {
-        return this._fetch('participating');
+        return this._fetchBoolean('participating');
     }
     participate(address) {
         return this._fetch('participate', { address });
