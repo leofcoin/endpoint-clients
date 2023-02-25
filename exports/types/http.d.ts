@@ -1,6 +1,6 @@
 type responseType = 'json' | 'text' | 'arrayBuffer' | 'clone' | 'formData' | 'blob';
 type networkVersion = 'peach' | string;
-export default class {
+export default class Client {
     url: URL;
     networkVersion: networkVersion;
     get isHttpClient(): boolean;
@@ -36,5 +36,12 @@ export default class {
     participate(address: any): Promise<any>;
     createContractAddress(owner: any, code: any, params: any): Promise<any>;
     deployContract(code: any, params: any): Promise<any>;
+    network(): Promise<any>;
+    networkStats(): {
+        version: string;
+        peers: {}[];
+        accounts: number;
+        accountsHolding: number;
+    };
 }
 export {};

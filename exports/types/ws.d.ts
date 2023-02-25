@@ -37,4 +37,11 @@ export default class Client {
     participate(address: string): {};
     createContractAddress(owner: string, code: string, params: {}): {};
     deployContract(code: string, params: {}): {};
+    network(): any;
+    networkStats(): {
+        version: string;
+        peers: {}[];
+        accounts: number;
+        accountsHolding: number;
+    };
 }

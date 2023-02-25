@@ -1,4 +1,4 @@
-class http {
+class Client {
     url;
     networkVersion;
     get isHttpClient() {
@@ -103,6 +103,12 @@ class http {
     deployContract(code, params) {
         return this._fetch('deployContract', { code, params });
     }
+    network() {
+        return this._fetch('network');
+    }
+    networkStats() {
+        return this._fetch('networkStats');
+    }
 }
 
-export { http as default };
+export { Client as default };

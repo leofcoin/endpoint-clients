@@ -101,6 +101,12 @@ class Client {
     deployContract(code, params) {
         return this.request('deployContract', { code, params });
     }
+    network() {
+        return this.request('network');
+    }
+    networkStats() {
+        return this.request('networkStats');
+    }
 }
 
 export { Client as default };

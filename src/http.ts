@@ -3,7 +3,7 @@
 type responseType = 'json' | 'text' | 'arrayBuffer' | 'clone' | 'formData' | 'blob';
 type networkVersion = 'peach' | string;
 
-export default class {
+export default class Client {
   url: URL;
   networkVersion: networkVersion;
   get isHttpClient() {
@@ -120,7 +120,16 @@ export default class {
   createContractAddress(owner, code, params) {
     return this._fetch('createContractAddress', { owner, code, params })
   }
+
   deployContract(code, params) {
     return this._fetch('deployContract', { code, params })
+  }
+
+  network() {
+    return this._fetch('network')
+  }
+
+  networkStats(): { version: string; peers: {}[]; accounts: number; accountsHolding: number; } {
+    return this._fetch('networkStats')
   }
 }

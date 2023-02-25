@@ -114,4 +114,11 @@ export default class Client {
   deployContract(code: string, params: {}): {} {
     return this.request('deployContract', { code, params })
   }
+  network() {
+    return this.request('network')
+  }
+
+  networkStats(): { version: string; peers: {}[]; accounts: number; accountsHolding: number } {
+    return this.request('networkStats')
+  }
 }
