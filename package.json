@@ -3,8 +3,20 @@
   "version": "0.2.3",
   "description": "",
   "exports": {
-    "./ws": "./exports/ws.js",
-    "./http": "./exports/http.js"
+    ".": {
+      "import": "./exports/index.js",
+      "types": "./exports/types/index.d.ts"
+    },
+    "./ws": {
+      "import": "./exports/ws.js",
+      "types": "./exports/types/ws.d.ts"
+    },
+    "./http": {
+      "import": "./exports/http.js",
+      "types": "./exports/types/http.d.ts"
+    },
+    "./ws.js": "./exports/ws.js",
+    "./http.js": "./exports/http.js"
   },
   "types": "./exports/types/index.d.ts",
   "type": "module",
