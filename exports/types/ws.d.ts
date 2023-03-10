@@ -44,4 +44,5 @@ export default class Client {
         accounts: number;
         accountsHolding: number;
     };
+    getNonce(address: string): any;
 }

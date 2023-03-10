@@ -129,7 +129,11 @@ export default class Client {
     return this._fetch('network')
   }
 
-  networkStats(): { version: string; peers: {}[]; accounts: number; accountsHolding: number; } {
+  networkStats(): Promise<{ version: string; peers: {}[]; accounts: number; accountsHolding: number; }> {
     return this._fetch('networkStats')
+  }
+
+  getNonce(address: string) {
+    return this._fetchNumber('getNonce', { address })
   }
 }

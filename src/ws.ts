@@ -121,4 +121,8 @@ export default class Client {
   networkStats(): { version: string; peers: {}[]; accounts: number; accountsHolding: number } {
     return this.request('networkStats')
   }
+
+  getNonce(address: string) {
+    return this.request('getNonce', { address })
+  } 
 }

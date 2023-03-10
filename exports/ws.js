@@ -107,6 +107,9 @@ class Client {
     networkStats() {
         return this.request('networkStats');
     }
+    getNonce(address) {
+        return this.request('getNonce', { address });
+    }
 }
 
 export { Client as default };

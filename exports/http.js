@@ -109,6 +109,9 @@ class Client {
     networkStats() {
         return this._fetch('networkStats');
     }
+    getNonce(address) {
+        return this._fetchNumber('getNonce', { address });
+    }
 }
 
 export { Client as default };

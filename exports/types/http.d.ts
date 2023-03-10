@@ -37,11 +37,12 @@ export default class Client {
     createContractAddress(owner: any, code: any, params: any): Promise<any>;
     deployContract(code: any, params: any): Promise<any>;
     network(): Promise<any>;
-    networkStats(): {
+    networkStats(): Promise<{
         version: string;
         peers: {}[];
         accounts: number;
         accountsHolding: number;
-    };
+    }>;
+    getNonce(address: string): Promise<number>;
 }
 export {};
