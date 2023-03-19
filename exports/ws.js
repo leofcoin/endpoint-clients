@@ -83,6 +83,15 @@ class Client {
     totalTransactions() {
         return this.request('totalTransactions');
     }
+    poolTransactions() {
+        return this.request('poolTransactions');
+    }
+    transactionsInPool() {
+        return this.request('transactionsInPool');
+    }
+    transactionPoolSize() {
+        return this.request('transactionPoolSize');
+    }
     totalBlocks() {
         return this.request('totalBlocks');
     }

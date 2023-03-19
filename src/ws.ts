@@ -96,6 +96,15 @@ export default class Client {
   totalTransactions(): number {
     return this.request('totalTransactions')
   }
+  poolTransactions() {
+      return this.request('poolTransactions')
+  }
+  transactionsInPool() {
+      return this.request('transactionsInPool')
+  }
+  transactionPoolSize() {
+      return this.request('transactionPoolSize')
+  }
   totalBlocks(): number {
     return this.request('totalBlocks')
   }

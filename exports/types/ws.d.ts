@@ -31,6 +31,9 @@ export default class Client {
     nativeTransfers(): number;
     totalSize(): number;
     totalTransactions(): number;
+    poolTransactions(): any;
+    transactionsInPool(): any;
+    transactionPoolSize(): any;
     totalBlocks(): number;
     nativeCalls(): number;
     participating(): boolean;

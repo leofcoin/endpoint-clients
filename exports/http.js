@@ -85,6 +85,15 @@ class Client {
     totalTransactions() {
         return this._fetchNumber('totalTransactions');
     }
+    poolTransactions() {
+        return this._fetch('poolTransactions');
+    }
+    transactionsInPool() {
+        return this._fetchNumber('transactionsInPool');
+    }
+    transactionPoolSize() {
+        return this._fetchNumber('transactionPoolSize');
+    }
     totalBlocks() {
         return this._fetchNumber('totalBlocks');
     }

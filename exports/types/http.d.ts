@@ -30,6 +30,9 @@ export default class Client {
     nativeTransfers(): Promise<number>;
     totalSize(): Promise<number>;
     totalTransactions(): Promise<number>;
+    poolTransactions(): Promise<any>;
+    transactionsInPool(): Promise<number>;
+    transactionPoolSize(): Promise<number>;
     totalBlocks(): Promise<number>;
     nativeCalls(): Promise<number>;
     participating(): Promise<boolean>;
