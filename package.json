@@ -15,8 +15,13 @@
       "import": "./exports/http.js",
       "types": "./exports/types/http.d.ts"
     },
+    "./direct": {
+      "import": "./exports/direct.js",
+      "types": "./exports/types/direct.d.ts"
+    },
     "./ws.js": "./exports/ws.js",
-    "./http.js": "./exports/http.js"
+    "./http.js": "./exports/http.js",
+    "./direct.js": "./exports/direct.js"
   },
   "types": "./exports/types/index.d.ts",
   "type": "module",
