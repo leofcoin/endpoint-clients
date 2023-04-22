@@ -1,8 +1,8 @@
-import socketRequestClient from 'socket-request-client';
+import SocketRequestClient from 'socket-request-client';
 export default class Client {
     url: string;
     networkVersion: string;
-    client: socketRequestClient;
+    client: SocketRequestClient;
     constructor(url?: string, networkVersion?: string);
     init(): Promise<void>;
     get pubsub(): {

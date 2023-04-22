@@ -8,7 +8,7 @@ export default class Client {
         subscribe: any;
     };
     balances(): any;
-    balanceOf(address: string, format: boolean): any;
+    balanceOf(address: string, format: boolean): Promise<any>;
     selectedAccount(): any;
     selectAccount(address: any): any;
     accounts(): any;
@@ -38,11 +38,14 @@ export default class Client {
     createContractAddress(owner: string, code: string, params: {}): {};
     deployContract(code: string, params: {}): {};
     network(): any;
-    networkStats(): {
+    networkStats(): Promise<{
         version: string;
         peers: {}[];
         accounts: number;
         accountsHolding: number;
-    };
+        accountsHoldingAmount: number;
+        topHolders: any[];
+    }>;
     getNonce(address: string): any;
+    lastBlock(): any;
 }

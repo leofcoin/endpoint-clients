@@ -145,4 +145,8 @@ export default class Client {
   getNonce(address: string) {
     return this._fetchNumber('getNonce', { address })
   }
+
+  lastBlock() {
+    
+  }
 }

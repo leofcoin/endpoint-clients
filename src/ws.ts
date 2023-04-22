@@ -1,9 +1,9 @@
-import socketRequestClient from 'socket-request-client'
+import SocketRequestClient from 'socket-request-client'
 
 export default class Client {
   url: string
   networkVersion: string
-  client: socketRequestClient
+  client: SocketRequestClient
 
   constructor(url = 'ws://localhost:4040', networkVersion = 'leofcoin-peach') {
     this.url = url
@@ -11,7 +11,7 @@ export default class Client {
   }
 
   async init() {
-    this.client = await socketRequestClient(this.url, this.networkVersion)
+    this.client = await new SocketRequestClient(this.url, this.networkVersion)
   }
 
   get pubsub() {

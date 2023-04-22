@@ -1,5 +1,9 @@
+import {formatUnits, BigNumber} from '@leofcoin/utils'
+
 declare var chain
 declare var peernet
+declare var transactionPoolStore
+declare var accountsStore
 
 export default class Client {
   url: string
@@ -13,8 +17,8 @@ export default class Client {
 
   get pubsub() {
     return {
-      publish: peernet.pubsub.publish,
-      subscribe: peernet.pubsub.subscribe
+      publish: globalThis.pubsub.publish,
+      subscribe: globalThis.pubsub.subscribe
     }
   }
 
@@ -22,8 +26,10 @@ export default class Client {
     return chain.balances
   }
     
-  balanceOf(address: string, format: boolean) {
-    return chain.balanceOf(address, format)
+  async balanceOf(address: string, format: boolean) {
+    const balances = await chain.balances
+    const balance = balances[address]
+    return format ? formatUnits(balance) : balance
   }
 
   selectedAccount() {
@@ -39,24 +45,24 @@ export default class Client {
   }
     
   hasTransactionToHandle() {
-    return chain.hasTransactionToHandle
+    return chain.hasTransactionToHandle()
   }
 
   getBlock(index: number) {
     return chain.getBlock(index)
   }
   blocks(amount: number) {
-    return chain.blocks(amount)
+    return chain.blocks.slice(amount)
   }
 
   sendTransaction(transaction) {
     return chain.sendTransaction(transaction)
   }
   peerId() {
-    return chain.peerId
+    return peernet.peerId
   }
   peers() {
-    return chain.peers
+    return peernet.peers
   }
   validators() {
     return chain.validators
@@ -90,16 +96,16 @@ export default class Client {
     return chain.totalTransactions
   }
   poolTransactions() {
-      return chain.poolTransactions
+      return transactionPoolStore.get()
   }
   transactionsInPool() {
-      return chain.transactionsInPool
+      return transactionPoolStore.length()
   }
   transactionPoolSize() {
-      return chain.transactionPoolSize
+      return transactionPoolStore.size()
   }
   totalBlocks(): number {
-    return chain.totalBlocks
+    return chain.blocks.length
   }
   nativeCalls(): number {
     return chain.nativeCalls
@@ -120,11 +126,40 @@ export default class Client {
     return chain.network
   }
 
-  networkStats(): { version: string; peers: {}[]; accounts: number; accountsHolding: number } {
-    return chain.networkStats
+  async networkStats(): Promise<{ version: string; peers: {}[]; accounts: number; accountsHolding: number, accountsHoldingAmount: number, topHolders: any[] }> {
+    let accountsHolding = 0
+    let accountsHoldingAmount = BigNumber.from(0)
+    let topHolders = []
+    const balances = Object.entries(await chain.balances)
+      .map(([holder, amount]) => {
+        amount = BigNumber.from(amount)
+        return {holder, amount}
+      })
+      .sort((a, b) => formatUnits(b.amount.sub(a.amount)))
+  
+    for (let {holder, amount} of balances) {
+      if (amount.gt(0)) {
+        accountsHoldingAmount = accountsHoldingAmount.add(amount)
+        accountsHolding += 1
+        topHolders.length < 100 && topHolders.push({holder, amount: formatUnits(amount)})
+      }
+    }
+    
+    return {
+      version: peernet.networkVersion,
+      peers: peernet.peers.map(([id, peer]) => id),
+      accounts: await accountsStore.length(),
+      accountsHolding,
+      accountsHoldingAmount: formatUnits(accountsHoldingAmount).toString(),
+      topHolders
+    }
   }
 
   getNonce(address: string) {
     return chain.getNonce(address)
   } 
+
+  lastBlock() {
+    return chain.lastBlock
+  }
 }

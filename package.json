@@ -46,6 +46,7 @@
     "tslib": "^2.5.0"
   },
   "dependencies": {
-    "socket-request-client": "^1.7.3"
+    "@leofcoin/utils": "^1.1.7",
+    "socket-request-client": "^1.7.5"
   }
 }

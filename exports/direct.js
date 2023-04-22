@@ -1,3 +1,5 @@
+import { formatUnits, BigNumber } from '@leofcoin/utils';
+
 class Client {
     url;
     networkVersion;
@@ -8,15 +10,17 @@ class Client {
     }
     get pubsub() {
         return {
-            publish: peernet.pubsub.publish,
-            subscribe: peernet.pubsub.subscribe
+            publish: globalThis.pubsub.publish,
+            subscribe: globalThis.pubsub.subscribe
         };
     }
     balances() {
         return chain.balances;
     }
-    balanceOf(address, format) {
-        return chain.balanceOf(address, format);
+    async balanceOf(address, format) {
+        const balances = await chain.balances;
+        const balance = balances[address];
+        return format ? formatUnits(balance) : balance;
     }
     selectedAccount() {
         return chain.selectedAccount;
@@ -28,22 +32,22 @@ class Client {
         return chain.accounts;
     }
     hasTransactionToHandle() {
-        return chain.hasTransactionToHandle;
+        return chain.hasTransactionToHandle();
     }
     getBlock(index) {
         return chain.getBlock(index);
     }
     blocks(amount) {
-        return chain.blocks(amount);
+        return chain.blocks.slice(amount);
     }
     sendTransaction(transaction) {
         return chain.sendTransaction(transaction);
     }
     peerId() {
-        return chain.peerId;
+        return peernet.peerId;
     }
     peers() {
-        return chain.peers;
+        return peernet.peers;
     }
     validators() {
         return chain.validators;
@@ -76,16 +80,16 @@ class Client {
         return chain.totalTransactions;
     }
     poolTransactions() {
-        return chain.poolTransactions;
+        return transactionPoolStore.get();
     }
     transactionsInPool() {
-        return chain.transactionsInPool;
+        return transactionPoolStore.length();
     }
     transactionPoolSize() {
-        return chain.transactionPoolSize;
+        return transactionPoolStore.size();
     }
     totalBlocks() {
-        return chain.totalBlocks;
+        return chain.blocks.length;
     }
     nativeCalls() {
         return chain.nativeCalls;
@@ -105,11 +109,37 @@ class Client {
     network() {
         return chain.network;
     }
-    networkStats() {
-        return chain.networkStats;
+    async networkStats() {
+        let accountsHolding = 0;
+        let accountsHoldingAmount = BigNumber.from(0);
+        let topHolders = [];
+        const balances = Object.entries(await chain.balances)
+            .map(([holder, amount]) => {
+            amount = BigNumber.from(amount);
+            return { holder, amount };
+        })
+            .sort((a, b) => formatUnits(b.amount.sub(a.amount)));
+        for (let { holder, amount } of balances) {
+            if (amount.gt(0)) {
+                accountsHoldingAmount = accountsHoldingAmount.add(amount);
+                accountsHolding += 1;
+                topHolders.length < 100 && topHolders.push({ holder, amount: formatUnits(amount) });
+            }
+        }
+        return {
+            version: peernet.networkVersion,
+            peers: peernet.peers.map(([id, peer]) => id),
+            accounts: await accountsStore.length(),
+            accountsHolding,
+            accountsHoldingAmount: formatUnits(accountsHoldingAmount).toString(),
+            topHolders
+        };
     }
     getNonce(address) {
         return chain.getNonce(address);
+    }
+    lastBlock() {
+        return chain.lastBlock;
     }
 }
 

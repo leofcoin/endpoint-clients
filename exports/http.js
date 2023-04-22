@@ -121,6 +121,8 @@ class Client {
     getNonce(address) {
         return this._fetchNumber('getNonce', { address });
     }
+    lastBlock() {
+    }
 }
 
 export { Client as default };

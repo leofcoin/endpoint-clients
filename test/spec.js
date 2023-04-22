@@ -26,7 +26,8 @@ export const implementations = [
   'totalBlocks',
   'totalSize',
   'totalTransactions',
-  'validators'
+  'validators',
+  'lastBlock'
 ]
 
 export const needsImplementations = (client) => {
@@ -39,5 +40,6 @@ export const needsImplementations = (client) => {
     }
     
   }
+  console.log(needs);
   return needs
 }

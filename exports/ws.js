@@ -1,4 +1,4 @@
-import socketRequestClient from 'socket-request-client';
+import SocketRequestClient from 'socket-request-client';
 
 class Client {
     url;
@@ -9,7 +9,7 @@ class Client {
         this.networkVersion = networkVersion;
     }
     async init() {
-        this.client = await socketRequestClient(this.url, this.networkVersion);
+        this.client = await new SocketRequestClient(this.url, this.networkVersion);
     }
     get pubsub() {
         return {
