@@ -48,4 +48,6 @@ export default class Client {
     }>;
     getNonce(address: string): any;
     lastBlock(): any;
+    blockHashMap(): any;
+    bootstrap(): any;
 }

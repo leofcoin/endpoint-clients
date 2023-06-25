@@ -47,6 +47,8 @@ export default class Client {
         accountsHolding: number;
     }>;
     getNonce(address: string): Promise<number>;
-    lastBlock(): void;
+    lastBlock(): Promise<any>;
+    blockHashMap(): Promise<any>;
+    bootstrap(): Promise<any>;
 }
 export {};

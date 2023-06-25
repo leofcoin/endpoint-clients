@@ -1,4 +1,4 @@
-import SocketRequestClient from 'socket-request-client';
+import { SocketRequestClient } from 'socket-request-client';
 
 class Client {
     url;
@@ -9,7 +9,8 @@ class Client {
         this.networkVersion = networkVersion;
     }
     async init() {
-        this.client = await new SocketRequestClient(this.url, this.networkVersion);
+        const client = new SocketRequestClient(this.url, this.networkVersion);
+        this.client = await client.init();
     }
     get pubsub() {
         return {
@@ -118,6 +119,15 @@ class Client {
     }
     getNonce(address) {
         return this.request('getNonce', { address });
+    }
+    lastBlock() {
+        return this.request('lastBlock');
+    }
+    blockHashMap() {
+        return this.request('blockHashMap');
+    }
+    bootstrap() {
+        return this.request('blockHashMap');
     }
 }
 

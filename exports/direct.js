@@ -141,6 +141,12 @@ class Client {
     lastBlock() {
         return chain.lastBlock;
     }
+    blockHashMap() {
+        return chain.blockHashMap;
+    }
+    bootstrap() {
+        return chain.blockHashMap;
+    }
 }
 
 export { Client as default };

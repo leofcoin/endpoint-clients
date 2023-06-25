@@ -1,9 +1,10 @@
-import SocketRequestClient from 'socket-request-client'
+import { SocketRequestClient } from 'socket-request-client'
+import ClientConnection from 'socket-request-client/connection'
 
 export default class Client {
   url: string
   networkVersion: string
-  client: SocketRequestClient
+  client: ClientConnection
 
   constructor(url = 'ws://localhost:4040', networkVersion = 'leofcoin-peach') {
     this.url = url
@@ -11,7 +12,8 @@ export default class Client {
   }
 
   async init() {
-    this.client = await new SocketRequestClient(this.url, this.networkVersion)
+    const client = new SocketRequestClient(this.url, this.networkVersion)
+    this.client = await client.init() as ClientConnection
   }
 
   get pubsub() {
@@ -75,25 +77,25 @@ export default class Client {
   staticCall(contract: string, method: string, params: {}) {
     return this.request('staticCall', {contract, method, params})
   }
-  nativeBurns(): number {
+  nativeBurns(): Promise<number> {
     return this.request('nativeBurns')
   }
-  contracts(): number {
+  contracts(): Promise<number> {
     return this.request('contracts')
   }
-  nativeMints(): number {
+  nativeMints(): Promise<number> {
     return this.request('nativeMints')
   }
-  nativeToken(): number {
+  nativeToken(): Promise<number> {
     return this.request('nativeToken')
   }
-  nativeTransfers(): number {
+  nativeTransfers(): Promise<number> {
     return this.request('nativeTransfers')
   }
-  totalSize(): number {
+  totalSize(): Promise<number> {
     return this.request('totalSize')
   }
-  totalTransactions(): number {
+  totalTransactions(): Promise<number> {
     return this.request('totalTransactions')
   }
   poolTransactions() {
@@ -105,13 +107,13 @@ export default class Client {
   transactionPoolSize() {
       return this.request('transactionPoolSize')
   }
-  totalBlocks(): number {
+  totalBlocks(): Promise<number> {
     return this.request('totalBlocks')
   }
-  nativeCalls(): number {
+  nativeCalls(): Promise<number> {
     return this.request('nativeCalls')
   }
-  participating(): boolean {
+  participating(): Promise<boolean> {
     return this.request('participating')
   }
   participate(address: string): {} {
@@ -127,11 +129,23 @@ export default class Client {
     return this.request('network')
   }
 
-  networkStats(): { version: string; peers: {}[]; accounts: number; accountsHolding: number } {
+  networkStats(): Promise<{ version: string; peers: {}[]; accounts: number; accountsHolding: number }> {
     return this.request('networkStats')
   }
 
   getNonce(address: string) {
     return this.request('getNonce', { address })
-  } 
+  }
+
+  lastBlock() {
+    return this.request('lastBlock')
+  }
+
+  blockHashMap() {
+    return this.request('blockHashMap')
+  }
+
+  bootstrap() {
+    return this.request('blockHashMap')
+  }
 }

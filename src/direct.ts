@@ -131,7 +131,7 @@ export default class Client {
     let accountsHoldingAmount = BigNumber.from(0)
     let topHolders = []
     const balances = Object.entries(await chain.balances)
-      .map(([holder, amount]) => {
+      .map(([holder, amount]): {holder: string, amount: BigNumber} => {
         amount = BigNumber.from(amount)
         return {holder, amount}
       })
@@ -161,5 +161,13 @@ export default class Client {
 
   lastBlock() {
     return chain.lastBlock
+  }
+
+  blockHashMap() {
+    return chain.blockHashMap
+  }
+
+  bootstrap() {
+    return chain.blockHashMap
   }
 }

@@ -122,6 +122,13 @@ class Client {
         return this._fetchNumber('getNonce', { address });
     }
     lastBlock() {
+        return this._fetch('lastBlock');
+    }
+    blockHashMap() {
+        return this._fetch('blockHashMap');
+    }
+    bootstrap() {
+        return this._fetch('blockHashMap');
     }
 }
 

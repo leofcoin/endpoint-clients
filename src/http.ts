@@ -147,6 +147,14 @@ export default class Client {
   }
 
   lastBlock() {
-    
+    return this._fetch('lastBlock')
+  }
+
+  blockHashMap() {
+    return this._fetch('blockHashMap')
+  }
+
+  bootstrap() {
+    return this._fetch('blockHashMap')
   }
 }

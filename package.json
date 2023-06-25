@@ -47,6 +47,6 @@
   },
   "dependencies": {
     "@leofcoin/utils": "^1.1.7",
-    "socket-request-client": "^1.7.5"
+    "socket-request-client": "^2.0.0"
   }
 }
