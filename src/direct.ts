@@ -36,8 +36,12 @@ export default class Client {
     return chain.selectedAccount
   }
 
-  selectAccount(address: any) {
-    return chain.selectAccount({address})
+  async selectAccount(address: any) {
+    try {
+      await walletStore.put('selected-account', address)  
+    } catch (error) {
+      throw new Error(`couldn't set selected account`)
+    }
   }
 
   accounts() {

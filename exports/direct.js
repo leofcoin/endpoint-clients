@@ -25,8 +25,13 @@ class Client {
     selectedAccount() {
         return chain.selectedAccount;
     }
-    selectAccount(address) {
-        return chain.selectAccount({ address });
+    async selectAccount(address) {
+        try {
+            await walletStore.put('selected-account', address);
+        }
+        catch (error) {
+            throw new Error(`couldn't set selected account`);
+        }
     }
     accounts() {
         return chain.accounts;

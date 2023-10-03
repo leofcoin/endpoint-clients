@@ -10,7 +10,7 @@ export default class Client {
     balances(): any;
     balanceOf(address: string, format: boolean): Promise<any>;
     selectedAccount(): any;
-    selectAccount(address: any): any;
+    selectAccount(address: any): Promise<void>;
     accounts(): any;
     hasTransactionToHandle(): any;
     getBlock(index: number): any;
