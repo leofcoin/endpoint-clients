@@ -23,7 +23,7 @@ class Client {
         return format ? formatUnits(balance) : balance;
     }
     selectedAccount() {
-        return chain.selectedAccount;
+        return peernet.selectedAccount;
     }
     async selectAccount(address) {
         try {

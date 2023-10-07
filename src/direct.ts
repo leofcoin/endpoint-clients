@@ -33,7 +33,7 @@ export default class Client {
   }
 
   selectedAccount() {
-    return chain.selectedAccount
+    return peernet.selectedAccount
   }
 
   async selectAccount(address: any) {
