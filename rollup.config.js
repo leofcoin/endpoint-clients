@@ -1,5 +1,4 @@
 import typescript from '@rollup/plugin-typescript'
-import tsConfig from './tsconfig.json' assert { type: 'json'}
 export default [{
   input: ['./src/index.ts', './src/http.ts', './src/ws.ts', './src/direct.ts'],
   output: {
@@ -7,7 +6,7 @@ export default [{
     format: 'es'
   },
   plugins: [
-    typescript(tsConfig)
+    typescript()
   ],
   external: [
     './identity.js'

@@ -1,11 +1,11 @@
 type responseType = 'json' | 'text' | 'arrayBuffer' | 'clone' | 'formData' | 'blob';
 type networkVersion = 'peach' | string;
 export default class Client {
-    url: URL;
+    url: string;
     networkVersion: networkVersion;
     get isHttpClient(): boolean;
     constructor(url: any, networkVersion: any);
-    _fetch(method: any, params?: any, type?: responseType): Promise<any>;
+    _fetch(method: string, params?: any, type?: responseType): Promise<any>;
     _fetchString(method: string, params?: any): Promise<string>;
     _fetchNumber(method: string, params?: any): Promise<number>;
     _fetchBoolean(method: string, params?: any): Promise<boolean>;

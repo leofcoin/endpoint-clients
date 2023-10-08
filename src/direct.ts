@@ -38,7 +38,7 @@ export default class Client {
 
   async selectAccount(address: any) {
     try {
-      await walletStore.put('selected-account', address)  
+      await globalThis.walletStore.put('selected-account', address)  
     } catch (error) {
       throw new Error(`couldn't set selected account`)
     }

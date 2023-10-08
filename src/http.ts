@@ -4,7 +4,7 @@ type responseType = 'json' | 'text' | 'arrayBuffer' | 'clone' | 'formData' | 'bl
 type networkVersion = 'peach' | string;
 
 export default class Client {
-  url: URL;
+  url: string;
   networkVersion: networkVersion;
   get isHttpClient() {
     return true
@@ -15,7 +15,7 @@ export default class Client {
     this.networkVersion = networkVersion
   }
   
-  async _fetch(method, params?, type: responseType = 'json') {
+  async _fetch(method: string, params?, type: responseType = 'json') {
     params = new URLSearchParams(params).toString()
     const response = await fetch(`${this.url}/${method}?${params}`)
     return response[type]()
