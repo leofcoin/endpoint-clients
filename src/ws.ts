@@ -86,7 +86,7 @@ export default class Client {
   nativeMints(): Promise<number> {
     return this.request('nativeMints')
   }
-  nativeToken(): Promise<number> {
+  nativeToken(): Promise<string> {
     return this.request('nativeToken')
   }
   nativeTransfers(): Promise<number> {

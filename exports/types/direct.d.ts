@@ -24,7 +24,7 @@ export default class Client {
     nativeBurns(): number;
     contracts(): number;
     nativeMints(): number;
-    nativeToken(): number;
+    nativeToken(): string;
     nativeTransfers(): number;
     totalSize(): number;
     totalTransactions(): number;

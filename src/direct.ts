@@ -87,7 +87,7 @@ export default class Client {
   nativeMints(): number {
     return chain.nativeMints
   }
-  nativeToken(): number {
+  nativeToken(): string {
     return chain.nativeToken
   }
   nativeTransfers(): number {

@@ -27,7 +27,7 @@ export default class Client {
     nativeBurns(): Promise<number>;
     contracts(): Promise<number>;
     nativeMints(): Promise<number>;
-    nativeToken(): Promise<number>;
+    nativeToken(): Promise<string>;
     nativeTransfers(): Promise<number>;
     totalSize(): Promise<number>;
     totalTransactions(): Promise<number>;
