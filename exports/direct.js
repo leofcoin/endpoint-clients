@@ -40,7 +40,7 @@ class Client {
         return chain.hasTransactionToHandle();
     }
     getBlock(index) {
-        return chain.getBlock(index - 1);
+        return chain.blocks[index - 1];
     }
     blocks(amount) {
         return chain.blocks.slice(amount);

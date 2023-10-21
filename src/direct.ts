@@ -53,7 +53,7 @@ export default class Client {
   }
 
   getBlock(index: number) {
-    return chain.getBlock(index - 1)
+    return chain.blocks[index - 1]
   }
   blocks(amount: number) {
     return chain.blocks.slice(amount)
