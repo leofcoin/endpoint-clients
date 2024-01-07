@@ -23,6 +23,9 @@
     "./http.js": "./exports/http.js",
     "./direct.js": "./exports/direct.js"
   },
+  "files": [
+    "exports"
+  ],
   "types": "./exports/types/index.d.ts",
   "type": "module",
   "scripts": {
