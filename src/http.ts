@@ -1,11 +1,10 @@
-
 // see https://developer.mozilla.org/en-US/docs/Web/API/Response#instance_methods
-type responseType = 'json' | 'text' | 'arrayBuffer' | 'clone' | 'formData' | 'blob';
-type networkVersion = 'peach' | string;
+type responseType = 'json' | 'text' | 'arrayBuffer' | 'clone' | 'formData' | 'blob'
+type networkVersion = 'peach' | string
 
 export default class Client {
-  url: string;
-  networkVersion: networkVersion;
+  url: string
+  networkVersion: networkVersion
   get isHttpClient() {
     return true
   }
@@ -14,7 +13,7 @@ export default class Client {
     this.url = url
     this.networkVersion = networkVersion
   }
-  
+
   async _fetch(method: string, params?, type: responseType = 'json') {
     params = new URLSearchParams(params).toString()
     const response = await fetch(`${this.url}/${method}?${params}`)
@@ -38,7 +37,7 @@ export default class Client {
   }
 
   balanceOf(address, format) {
-    return this._fetch(`balanceOf`, {address, format})
+    return this._fetch(`balanceOf`, { address, format })
   }
 
   selectedAccount() {
@@ -46,13 +45,13 @@ export default class Client {
   }
 
   selectAccount(address) {
-    return this._fetch('selectAccount', {address})
+    return this._fetch('selectAccount', { address })
   }
 
   accounts() {
     return this._fetch('accounts')
   }
-    
+
   hasTransactionToHandle() {
     return this._fetchBoolean('hasTransactionToHandle')
   }
@@ -61,7 +60,7 @@ export default class Client {
     return this._fetch('getBlock', { index })
   }
   blocks(amount) {
-    return this._fetch('blocks', {amount})
+    return this._fetch('blocks', { amount })
   }
 
   sendTransaction(transaction) {
@@ -81,7 +80,7 @@ export default class Client {
   }
 
   staticCall(contract, method, params) {
-    return this._fetch('staticCall', {contract, method, params})
+    return this._fetch('staticCall', { contract, method, params })
   }
   nativeBurns() {
     return this._fetchNumber('nativeBurns')
@@ -105,13 +104,13 @@ export default class Client {
     return this._fetchNumber('totalTransactions')
   }
   poolTransactions() {
-      return this._fetch('poolTransactions')
+    return this._fetch('poolTransactions')
   }
   transactionsInPool() {
-      return this._fetchNumber('transactionsInPool')
+    return this._fetchNumber('transactionsInPool')
   }
   transactionPoolSize() {
-      return this._fetchNumber('transactionPoolSize')
+    return this._fetchNumber('transactionPoolSize')
   }
   totalBlocks() {
     return this._fetchNumber('totalBlocks')
@@ -138,7 +137,7 @@ export default class Client {
     return this._fetch('network')
   }
 
-  networkStats(): Promise<{ version: string; peers: {}[]; accounts: number; accountsHolding: number; }> {
+  networkStats(): Promise<{ version: string; peers: {}[]; accounts: number; accountsHolding: number }> {
     return this._fetch('networkStats')
   }
 

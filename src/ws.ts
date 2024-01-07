@@ -13,7 +13,7 @@ export default class Client {
 
   async init() {
     const client = new SocketRequestClient(this.url, this.networkVersion)
-    this.client = await client.init() as ClientConnection
+    this.client = (await client.init()) as ClientConnection
   }
 
   get pubsub() {
@@ -24,15 +24,15 @@ export default class Client {
   }
 
   request(url: string, params?: {}) {
-    return this.client.request({url, params})
+    return this.client.request({ url, params })
   }
 
   balances() {
     return this.request('balances')
   }
-    
+
   balanceOf(address: string, format: boolean) {
-    return this.request('balanceOf', {address, format})
+    return this.request('balanceOf', { address, format })
   }
 
   selectedAccount() {
@@ -40,13 +40,13 @@ export default class Client {
   }
 
   selectAccount(address: any) {
-    return this.request('selectAccount', {address})
+    return this.request('selectAccount', { address })
   }
 
   accounts() {
     return this.request('accounts')
   }
-    
+
   hasTransactionToHandle() {
     return this.request('hasTransactionToHandle')
   }
@@ -55,7 +55,7 @@ export default class Client {
     return this.request('getBlock', { index })
   }
   blocks(amount: number) {
-    return this.request('blocks', {amount})
+    return this.request('blocks', { amount })
   }
 
   sendTransaction(transaction) {
@@ -75,7 +75,7 @@ export default class Client {
   }
 
   staticCall(contract: string, method: string, params: {}) {
-    return this.request('staticCall', {contract, method, params})
+    return this.request('staticCall', { contract, method, params })
   }
   nativeBurns(): Promise<number> {
     return this.request('nativeBurns')
@@ -99,13 +99,13 @@ export default class Client {
     return this.request('totalTransactions')
   }
   poolTransactions() {
-      return this.request('poolTransactions')
+    return this.request('poolTransactions')
   }
   transactionsInPool() {
-      return this.request('transactionsInPool')
+    return this.request('transactionsInPool')
   }
   transactionPoolSize() {
-      return this.request('transactionPoolSize')
+    return this.request('transactionPoolSize')
   }
   totalBlocks(): Promise<number> {
     return this.request('totalBlocks')
@@ -129,7 +129,12 @@ export default class Client {
     return this.request('network')
   }
 
-  networkStats(): Promise<{ version: string; peers: {}[]; accounts: number; accountsHolding: number }> {
+  networkStats(): Promise<{
+    version: string
+    peers: {}[]
+    accounts: number
+    accountsHolding: number
+  }> {
     return this.request('networkStats')
   }
 
