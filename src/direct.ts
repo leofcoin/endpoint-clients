@@ -1,4 +1,4 @@
-import {formatUnits, BigNumber} from '@leofcoin/utils'
+import { formatUnits, BigNumber } from '@leofcoin/utils'
 
 declare var chain
 declare var peernet
@@ -8,12 +8,12 @@ declare var accountsStore
 export default class Client {
   url: string
   networkVersion: string
-  client;
+  client
 
   constructor(url = 'ws://localhost:4040', networkVersion = 'leofcoin-peach') {
     this.url = url
     this.networkVersion = networkVersion
-  } 
+  }
 
   get pubsub() {
     return {
@@ -25,7 +25,7 @@ export default class Client {
   balances() {
     return chain.balances
   }
-    
+
   async balanceOf(address: string, format: boolean) {
     const balances = await chain.balances
     const balance = balances[address]
@@ -38,7 +38,7 @@ export default class Client {
 
   async selectAccount(address: any) {
     try {
-      await globalThis.walletStore.put('selected-account', address)  
+      await globalThis.walletStore.put('selected-account', address)
     } catch (error) {
       throw new Error(`couldn't set selected account`)
     }
@@ -47,16 +47,17 @@ export default class Client {
   accounts() {
     return chain.accounts
   }
-    
+
   hasTransactionToHandle() {
     return chain.hasTransactionToHandle()
   }
 
   getBlock(index: number) {
-    return chain.blocks[index - 1]
+    return chain.getBlock(index)
   }
+
   blocks(amount: number) {
-    return chain.blocks.slice(amount)
+    return chain.getBlocks(amount)
   }
 
   sendTransaction(transaction) {
@@ -100,16 +101,16 @@ export default class Client {
     return chain.totalTransactions
   }
   poolTransactions() {
-      return transactionPoolStore.get()
+    return transactionPoolStore.get()
   }
   transactionsInPool() {
-      return transactionPoolStore.length()
+    return transactionPoolStore.length()
   }
   transactionPoolSize() {
-      return transactionPoolStore.size()
+    return transactionPoolStore.size()
   }
   totalBlocks(): number {
-    return chain.blocks.length
+    return chain.totalBlocks
   }
   nativeCalls(): number {
     return chain.nativeCalls
@@ -130,25 +131,32 @@ export default class Client {
     return chain.network
   }
 
-  async networkStats(): Promise<{ version: string; peers: {}[]; accounts: number; accountsHolding: number, accountsHoldingAmount: number, topHolders: any[] }> {
+  async networkStats(): Promise<{
+    version: string
+    peers: {}[]
+    accounts: number
+    accountsHolding: number
+    accountsHoldingAmount: number
+    topHolders: any[]
+  }> {
     let accountsHolding = 0
     let accountsHoldingAmount = BigNumber.from(0)
     let topHolders = []
     const balances = Object.entries(await chain.balances)
-      .map(([holder, amount]): {holder: string, amount: BigNumber} => {
+      .map(([holder, amount]): { holder: string; amount: BigNumber } => {
         amount = BigNumber.from(amount)
-        return {holder, amount}
+        return { holder, amount }
       })
       .sort((a, b) => formatUnits(b.amount.sub(a.amount)))
-  
-    for (let {holder, amount} of balances) {
+
+    for (let { holder, amount } of balances) {
       if (amount.gt(0)) {
         accountsHoldingAmount = accountsHoldingAmount.add(amount)
         accountsHolding += 1
-        topHolders.length < 100 && topHolders.push({holder, amount: formatUnits(amount)})
+        topHolders.length < 100 && topHolders.push({ holder, amount: formatUnits(amount) })
       }
     }
-    
+
     return {
       version: peernet.networkVersion,
       peers: peernet.peers.map(([id, peer]) => id),
@@ -161,7 +169,7 @@ export default class Client {
 
   getNonce(address: string) {
     return chain.getNonce(address)
-  } 
+  }
 
   lastBlock() {
     return chain.lastBlock
