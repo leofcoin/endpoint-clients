@@ -57,7 +57,7 @@ export default class Client {
   }
 
   blocks(amount: number) {
-    return chain.getBlocks(amount)
+    return globalThis.blockStore.values(amount)
   }
 
   sendTransaction(transaction) {
