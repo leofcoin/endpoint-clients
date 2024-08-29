@@ -115,7 +115,7 @@ export default class Client {
     return transactionPoolStore.get()
   }
   async totalSize(): Promise<number> {
-    return (await transactionPoolStore.size()) + (await chain.blockStore.size()) + (await chain.accountsStore.size())
+    return (await transactionPoolStore.size()) + (await blockStore.size()) + (await accountsStore.size())
   }
 
   transactionsInPool() {
