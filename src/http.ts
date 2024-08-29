@@ -59,6 +59,7 @@ export default class Client {
   getBlock(index) {
     return this._fetch('getBlock', { index })
   }
+
   blocks(amount) {
     return this._fetch('blocks', { amount })
   }
@@ -66,15 +67,19 @@ export default class Client {
   sendTransaction(transaction) {
     return this._fetch('sendTransaction', transaction)
   }
+
   peerId() {
     return this._fetchString('peerId')
   }
+
   peers() {
     return this._fetch('peers')
   }
+
   validators() {
     return this._fetch('validators')
   }
+
   lookup(name) {
     return this._fetch('lookup', { name })
   }
@@ -82,45 +87,71 @@ export default class Client {
   staticCall(contract, method, params) {
     return this._fetch('staticCall', { contract, method, params })
   }
-  nativeBurns() {
-    return this._fetchNumber('nativeBurns')
-  }
+
   contracts() {
     return this._fetch('contracts')
   }
-  nativeMints() {
-    return this._fetchNumber('nativeMints')
-  }
+
   nativeToken() {
     return this._fetchString('nativeToken')
   }
-  nativeTransfers() {
-    return this._fetchNumber('nativeTransfers')
-  }
-  totalSize() {
-    return this._fetchNumber('totalSize')
-  }
-  totalTransactions() {
-    return this._fetchNumber('totalTransactions')
-  }
-  poolTransactions() {
-    return this._fetch('poolTransactions')
-  }
-  transactionsInPool() {
-    return this._fetchNumber('transactionsInPool')
-  }
-  transactionPoolSize() {
-    return this._fetchNumber('transactionPoolSize')
-  }
-  totalBlocks() {
-    return this._fetchNumber('totalBlocks')
-  }
+
   nativeCalls() {
     return this._fetchNumber('nativeCalls')
   }
+
+  nativeMints() {
+    return this._fetchNumber('nativeMints')
+  }
+
+  nativeBurns() {
+    return this._fetchNumber('nativeBurns')
+  }
+
+  nativeTransfers() {
+    return this._fetchNumber('nativeTransfers')
+  }
+
+  totalBurnAmount() {
+    return this._fetchNumber('totalBurnAmount')
+  }
+
+  totalMintAmount() {
+    return this._fetchNumber('totalMintAmount')
+  }
+
+  totalTransferAmount() {
+    return this._fetchNumber('totalTransferAmount')
+  }
+
+  totalTransactions() {
+    return this._fetchNumber('totalTransactions')
+  }
+
+  totalBlocks() {
+    return this._fetchNumber('totalBlocks')
+  }
+
+  totalSize() {
+    return this._fetchNumber('totalSize')
+  }
+
+  poolTransactions() {
+    return this._fetch('poolTransactions')
+  }
+
+  transactionsInPool() {
+    return this._fetchNumber('transactionsInPool')
+  }
+
+  transactionPoolSize() {
+    return this._fetchNumber('transactionPoolSize')
+  }
+
   participating() {
     return this._fetchBoolean('participating')
   }
+
   participate(address) {
     return this._fetch('participate', { address })
   }
