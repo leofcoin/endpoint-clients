@@ -75,45 +75,54 @@ export default class Client {
   lookup(name: string) {
     return chain.lookup(name)
   }
-
   staticCall(contract: string, method: string, params: {}) {
     return chain.staticCall(contract, method, params)
-  }
-  nativeBurns(): number {
-    return chain.nativeBurns
   }
   contracts(): number {
     return chain.contracts
   }
+  nativeToken(): string {
+    return chain.nativeToken
+  }
+  nativeCalls(): number {
+    return chain.nativeCalls
+  }
   nativeMints(): number {
     return chain.nativeMints
   }
-  nativeToken(): string {
-    return chain.nativeToken
+  nativeBurns(): number {
+    return chain.nativeBurns
   }
   nativeTransfers(): number {
     return chain.nativeTransfers
   }
-  totalSize(): number {
-    return chain.totalSize
+  totalBurnAmount(): number {
+    return chain.totalBurnAmount
+  }
+  totalMintAmount(): number {
+    return chain.totalMintAmount
+  }
+  totalTransferAmount(): number {
+    return chain.totalTransferAmount
   }
   totalTransactions(): number {
     return chain.totalTransactions
   }
+  totalBlocks(): number {
+    return chain.totalBlocks
+  }
   poolTransactions() {
     return transactionPoolStore.get()
   }
+  async totalSize(): Promise<number> {
+    return (await transactionPoolStore.size()) + (await chain.blockStore.size()) + (await chain.accountsStore.size())
+  }
+
   transactionsInPool() {
     return transactionPoolStore.length()
   }
   transactionPoolSize() {
     return transactionPoolStore.size()
-  }
-  totalBlocks(): number {
-    return chain.totalBlocks
-  }
-  nativeCalls(): number {
-    return chain.nativeCalls
   }
   participating(): boolean {
     return chain.participating
