@@ -184,6 +184,10 @@ export default class Client {
     return this.request('lastBlock')
   }
 
+  lastBlockHeight() {
+    return this.request('lastBlockHeight')
+  }
+
   blockHashMap() {
     return this.request('blockHashMap')
   }

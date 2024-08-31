@@ -188,6 +188,10 @@ export default class Client {
     return chain.lastBlock
   }
 
+  lastBlockHeight() {
+    return chain.lastBlockHeight
+  }
+
   blockHashMap() {
     return chain.blockHashMap
   }
