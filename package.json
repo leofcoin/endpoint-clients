@@ -44,12 +44,12 @@
   },
   "homepage": "https://github.com/leofcoin/endpoint-clients#readme",
   "devDependencies": {
-    "@rollup/plugin-typescript": "^11.0.0",
-    "rollup": "^3.14.0",
-    "tslib": "^2.5.0"
+    "@rollup/plugin-typescript": "^11.1.6",
+    "rollup": "^4.21.2",
+    "tslib": "^2.7.0"
   },
   "dependencies": {
-    "@leofcoin/utils": "^1.1.7",
-    "socket-request-client": "^2.0.6"
+    "@leofcoin/utils": "^1.1.18",
+    "socket-request-client": "^2.0.9"
   }
 }
