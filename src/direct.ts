@@ -4,6 +4,7 @@ declare var chain
 declare var peernet
 declare var transactionPoolStore
 declare var accountsStore
+declare var blockStore
 
 export default class Client {
   url: string
@@ -77,6 +78,9 @@ export default class Client {
   }
   staticCall(contract: string, method: string, params: {}) {
     return chain.staticCall(contract, method, params)
+  }
+  totalContracts(): number {
+    return chain.totalContracts
   }
   contracts(): number {
     return chain.contracts

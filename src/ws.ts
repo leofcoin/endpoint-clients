@@ -87,6 +87,10 @@ export default class Client {
     return this.request('contracts')
   }
 
+  totalContracts(): Promise<number> {
+    return this.request('totalContracts')
+  }
+
   nativeToken(): Promise<string> {
     return this.request('nativeToken')
   }

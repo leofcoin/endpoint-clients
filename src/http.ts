@@ -92,6 +92,10 @@ export default class Client {
     return this._fetch('contracts')
   }
 
+  totalContracts() {
+    return this._fetchNumber('totalContracts')
+  }
+
   nativeToken() {
     return this._fetchString('nativeToken')
   }
