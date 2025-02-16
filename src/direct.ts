@@ -1,4 +1,4 @@
-import { formatUnits, BigNumber } from '@leofcoin/utils'
+import { formatUnits } from '@leofcoin/utils'
 
 declare var chain
 declare var peernet
@@ -153,18 +153,18 @@ export default class Client {
     topHolders: any[]
   }> {
     let accountsHolding = 0
-    let accountsHoldingAmount = BigNumber.from(0)
+    let accountsHoldingAmount = BigInt(0)
     let topHolders = []
     const balances = Object.entries(await chain.balances)
-      .map(([holder, amount]): { holder: string; amount: BigNumber } => {
-        amount = BigNumber.from(amount)
+      .map(([holder, amount]): { holder: string; amount: number } => {
+        amount = BigInt(amount)
         return { holder, amount }
       })
-      .sort((a, b) => formatUnits(b.amount.sub(a.amount)))
+      .sort((a, b) => formatUnits((b.amount -= a.amount)))
 
     for (let { holder, amount } of balances) {
-      if (amount.gt(0)) {
-        accountsHoldingAmount = accountsHoldingAmount.add(amount)
+      if (amount > 0) {
+        accountsHoldingAmount += amount
         accountsHolding += 1
         topHolders.length < 100 && topHolders.push({ holder, amount: formatUnits(amount) })
       }
